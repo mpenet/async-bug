@@ -13,3 +13,13 @@
 (defn foo [x]
   (let [y :foo]
     (a/go)))
+
+;; reflection in go
+(defn f []
+  (let [a "foo"]
+    (.substring a 1 2)
+    (a/go
+      (loop []
+        (.substring a 1 2)
+        (a/<! nil)
+        (recur)))))
