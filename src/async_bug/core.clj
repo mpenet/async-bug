@@ -4,9 +4,12 @@
 
 (set! *warn-on-reflection* true)
 
-(defn foo [^Date x]
+;; NPE
+(defn foo [x]
   (let [y nil]
-    (a/go
-      (loop []
-        (let [t (.getTime x)]
-          (println t))))))
+    (a/go))) ;; doing stuff or not in go has no impact
+
+;; OK
+(defn foo [x]
+  (let [y :foo]
+    (a/go)))
